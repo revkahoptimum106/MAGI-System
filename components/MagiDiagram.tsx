@@ -156,6 +156,9 @@ export default function MagiDiagram({ partialResults, processingUnits, finalVerd
               <button className="modal-close" onClick={() => setModalId(null)}>✕</button>
             </div>
             <div className="modal-body">
+              {modalResult.isCritical && (
+                <div className="modal-critical">⚠ CRITICAL MATTER — 重大議題</div>
+              )}
               <div
                 className="modal-vote"
                 style={{

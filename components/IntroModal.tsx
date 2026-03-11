@@ -17,10 +17,9 @@ const LANGS: Record<string, Lang> = {
     ],
     steps: [
       "在下方輸入欄輸入是非題形式的議題，按下 Enter 送出",
-      "三台電腦同時開始審議，各自獨立呼叫 AI",
-      "率先完成的電腦立即停止閃爍並顯示結果",
-      "三台全部完成後顯示最終多數決裁決",
+      "三台電腦同時審議，完成後以多數決顯示最終裁決",
       "點擊任一電腦可查看詳細推理說明",
+      "⚠ 若兩台以上判定為重大議題，切換為全票制：三台必須一致同意才能執行",
     ],
     confirm: "CONFIRM — 開始審議",
   },
@@ -32,10 +31,9 @@ const LANGS: Record<string, Lang> = {
     ],
     steps: [
       "Type a yes/no question in the input below and press Enter",
-      "All three units begin deliberating simultaneously",
-      "Each unit stops flickering and shows its result as soon as it responds",
-      "The final verdict is computed by majority vote once all three finish",
+      "All three units deliberate simultaneously and reach a verdict by majority vote",
       "Click any unit to read its full reasoning",
+      "⚠ If two or more units flag the topic as a critical matter, unanimous approval is required — any dissent blocks the action",
     ],
     confirm: "CONFIRM — BEGIN DELIBERATION",
   },
@@ -47,16 +45,15 @@ const LANGS: Record<string, Lang> = {
     ],
     steps: [
       "賛否を問う形式の議題を入力し、Enter キーで送信",
-      "3台のユニットが同時に独立して審議を開始",
-      "応答が届いたユニットから順にフリッカーが止まり結果を表示",
-      "全ユニットが完了した時点で多数決により最終決定を表示",
+      "3台が同時に審議を行い、多数決で最終決定を表示",
       "各ユニットをクリックすると詳細な判断理由を確認できます",
+      "⚠ 2台以上が重大事項と判断した場合、全会一致が要求されます：1台でも反対すれば否決となります",
     ],
     confirm: "CONFIRM — 審議を開始",
   },
 };
 
-const STEP_PREFIXES = ["▸", "▸", "▸", "▸", "▸"];
+const STEP_PREFIXES = ["▸", "▸", "▸", "▸"];
 
 interface Props {
   onClose: () => void;

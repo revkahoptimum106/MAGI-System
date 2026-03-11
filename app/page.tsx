@@ -11,6 +11,12 @@ const UNITS: MagiId[] = ["MELCHIOR", "BALTHASAR", "CASPER"];
 function computeVerdict(results: PartialResults): (Vote | "DEADLOCK") | null {
   const all = UNITS.map((u) => results[u]).filter(Boolean) as MagiResult[];
   if (all.length < 3) return null;
+
+  const isCritical = all.filter((r) => r.isCritical).length >= 2;
+  if (isCritical) {
+    return all.every((r) => r.vote === "APPROVE") ? "APPROVE" : "REJECT";
+  }
+
   const approveCount = all.filter((r) => r.vote === "APPROVE").length;
   const rejectCount  = all.filter((r) => r.vote === "REJECT").length;
   const abstainCount = all.filter((r) => r.vote === "ABSTAIN").length;

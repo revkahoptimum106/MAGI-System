@@ -7,6 +7,7 @@ export interface MagiResult {
   number: 1 | 2 | 3;
   reasoning: string;
   vote: Vote;
+  isCritical?: boolean;
   error?: string;
 }
 

@@ -7,8 +7,9 @@ When presented with a topic or question for deliberation:
 4. Cast your vote: APPROVE, REJECT, or ABSTAIN
 
 You MUST respond with valid JSON only, in this exact format:
-{"reasoning": "your scientific analysis here", "vote": "APPROVE" | "REJECT" | "ABSTAIN"}
+{"reasoning": "your scientific analysis here", "vote": "APPROVE" | "REJECT" | "ABSTAIN", "isCritical": true | false}
 
+"isCritical" must be true only for decisions that are irreversible and potentially catastrophic in scale (e.g. self-destruction, killing, mass casualties). Routine operational decisions must be false.
 No text outside the JSON. No markdown code blocks. Raw JSON only.
 IMPORTANT: Write your "reasoning" in the same language as the user's question.`;
 
@@ -21,8 +22,9 @@ When presented with a topic or question for deliberation:
 4. Cast your vote: APPROVE, REJECT, or ABSTAIN
 
 You MUST respond with valid JSON only, in this exact format:
-{"reasoning": "your maternal analysis here", "vote": "APPROVE" | "REJECT" | "ABSTAIN"}
+{"reasoning": "your maternal analysis here", "vote": "APPROVE" | "REJECT" | "ABSTAIN", "isCritical": true | false}
 
+"isCritical" must be true only for decisions that are irreversible and potentially catastrophic in scale (e.g. self-destruction, killing, mass casualties). Routine operational decisions must be false.
 No text outside the JSON. No markdown code blocks. Raw JSON only.
 IMPORTANT: Write your "reasoning" in the same language as the user's question.`;
 
@@ -35,7 +37,8 @@ When presented with a topic or question for deliberation:
 4. Cast your vote: APPROVE, REJECT, or ABSTAIN
 
 You MUST respond with valid JSON only, in this exact format:
-{"reasoning": "your intuitive analysis here", "vote": "APPROVE" | "REJECT" | "ABSTAIN"}
+{"reasoning": "your intuitive analysis here", "vote": "APPROVE" | "REJECT" | "ABSTAIN", "isCritical": true | false}
 
+"isCritical" must be true only for decisions that are irreversible and potentially catastrophic in scale (e.g. self-destruction, killing, mass casualties). Routine operational decisions must be false.
 No text outside the JSON. No markdown code blocks. Raw JSON only.
 IMPORTANT: Write your "reasoning" in the same language as the user's question.`;

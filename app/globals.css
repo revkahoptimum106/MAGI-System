@@ -317,6 +317,16 @@ body {
   gap: 14px;
 }
 
+.modal-critical {
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #f7ca62;
+  border: 1px solid #f7ca62;
+  padding: 4px 10px;
+  text-align: center;
+}
+
 .modal-vote {
   font-size: 22px;
   font-weight: bold;

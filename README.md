@@ -23,6 +23,8 @@ A fan-made web application inspired by the MAGI supercomputer from _Neon Genesis
 | **ABSTAIN**  | At least two units abstained |
 | **DEADLOCK** | No majority reached       |
 
+> **Critical Matter**: If two or more units assess the topic as irreversible and potentially catastrophic (e.g. self-destruction, killing), the system automatically switches to a unanimous rule — all three units must approve for the action to proceed; any dissent or abstention results in rejection. Click any unit to see whether it flagged the topic as critical.
+
 ## Getting Started
 
 ### Prerequisites

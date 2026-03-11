@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { queryMelchior, queryBalthasar, queryCasper } from "@/lib/ai-clients";
 import { MagiId, MagiResult } from "@/types/magi";
 
-const UNITS: Record<MagiId, { number: 1 | 2 | 3; query: (t: string) => Promise<{ reasoning: string; vote: import("@/types/magi").Vote }> }> = {
+const UNITS: Record<MagiId, { number: 1 | 2 | 3; query: (t: string) => Promise<{ reasoning: string; vote: import("@/types/magi").Vote; isCritical: boolean }> }> = {
   MELCHIOR:  { number: 1, query: queryMelchior  },
   BALTHASAR: { number: 2, query: queryBalthasar },
   CASPER:    { number: 3, query: queryCasper    },
@@ -22,8 +22,8 @@ export async function POST(req: NextRequest) {
   const { number, query } = UNITS[unit];
 
   try {
-    const { reasoning, vote } = await query(topic);
-    const result: MagiResult = { id: unit, number, reasoning, vote };
+    const { reasoning, vote, isCritical } = await query(topic);
+    const result: MagiResult = { id: unit, number, reasoning, vote, isCritical };
     return NextResponse.json(result);
   } catch (err) {
     const result: MagiResult = {
