@@ -1,111 +1,94 @@
 # MAGI 系統
 
-**Language / 語言 / 言語:** [English](README.md) · [繁體中文](README.zh.md) · [日本語](README.ja.md)
+一個以《新世紀福音戰士》中的 MAGI 超級電腦為靈感製作的粉絲向 Web 應用程式。輸入一個是非題，三台 AI 電腦將同時進行審議，以多數決得出最終裁決。
+
+**[English](README.md) | [日本語](README.ja.md)**
 
 ---
 
-以網頁重現《新世紀福音戰士》中的 MAGI 超級電腦介面，串接三個真實 AI API 同時進行審議。
+## 三台電腦
 
-三台電腦各自扮演 MAGI 其中一個單元，針對輸入的議題獨立投票（合意／否決／棄権），每台電腦的結果在收到後立即顯示，不需等待全部完成。最終裁決以多數決決定。
+| 電腦 | AI 模型 | 視角 |
+|------|---------|------|
+| MELCHIOR • 1 | OpenAI GPT | 科學家——邏輯、理性分析 |
+| BALTHASAR • 2 | Anthropic Claude | 母親——保護、關懷導向 |
+| CASPER • 3 | Google Gemini | 女性——直覺、情感洞察 |
 
-## MAGI 單元
+## 裁決結果
 
-| 單元 | 編號 | AI 模型 | 人格 |
-|------|------|---------|------|
-| MELCHIOR | 1 | OpenAI GPT-4o | 科學家——邏輯、理性分析 |
-| BALTHASAR | 2 | Anthropic Claude | 母親——保護、關懷導向 |
-| CASPER | 3 | Google Gemini | 女性——直覺、情感洞察 |
+| 結果 | 說明 |
+|------|------|
+| **合意（APPROVE）** | 多數贊成 |
+| **否決（REJECT）** | 多數反對 |
+| **棄権（ABSTAIN）** | 三台全部棄権 |
+| **膠着（DEADLOCK）** | 無多數決定 |
 
-## 技術架構
+## 開始使用
 
-- **Next.js 16**（App Router、TypeScript）
-- **Tailwind CSS v4**
-- OpenAI SDK、Anthropic SDK、Google Generative AI SDK
-- 三組獨立並行 fetch，每台電腦回應後立即更新 UI
+### 前置需求
 
-## 啟動方式
+您需要以下服務的 API 金鑰：
 
-### 方式 A：Docker（推薦）
+- [OpenAI](https://platform.openai.com/api-keys) — 供 MELCHIOR-1 使用
+- [Anthropic](https://console.anthropic.com/settings/keys) — 供 BALTHASAR-2 使用
+- [Google AI Studio](https://aistudio.google.com/apikey) — 供 CASPER-3 使用
+
+### 本地開發
 
 ```bash
+# 1. 複製倉庫
+git clone https://github.com/hirakujira/MAGI.git
+cd MAGI
+
+# 2. 設定環境變數
 cp .env.local.example .env.local
-# 在 .env.local 填入 API 金鑰
-docker compose up -d
-```
+# 編輯 .env.local 並填入您的 API 金鑰
 
-開啟瀏覽器前往 [http://localhost:3000](http://localhost:3000)。
-
-```bash
-# 程式碼修改後重新建置
-docker compose up -d --build
-
-# 停止服務
-docker compose down
-```
-
-### 方式 B：本地開發
-
-**1. 安裝相依套件**
-
-```bash
+# 3. 安裝相依套件
 npm install
-```
 
-**2. 設定 API 金鑰**
-
-```bash
-cp .env.local.example .env.local
-```
-
-```env
-OPENAI_API_KEY=你的_openai_api_key
-ANTHROPIC_API_KEY=你的_anthropic_api_key
-GOOGLE_API_KEY=你的_google_api_key
-```
-
-- OpenAI API 金鑰：https://platform.openai.com/api-keys
-- Anthropic API 金鑰：https://console.anthropic.com/settings/keys
-- Google AI API 金鑰：https://aistudio.google.com/apikey
-
-**3. 啟動開發伺服器**
-
-```bash
+# 4. 啟動開發伺服器
 npm run dev
 ```
 
-在瀏覽器開啟 [http://localhost:3000](http://localhost:3000)。
+開啟 [http://localhost:3000](http://localhost:3000)。
 
-## 自訂模型
+### Docker
 
-在 `.env.local` 加入以下選填變數可覆蓋預設模型：
+```bash
+# 先複製並設定環境變數
+cp .env.local.example .env.local
 
-```env
-OPENAI_MODEL=gpt-4o              # 預設：gpt-4o
-ANTHROPIC_MODEL=claude-opus-4-5  # 預設：claude-opus-4-5
-GOOGLE_MODEL=gemini-2.5-flash    # 預設：gemini-2.5-flash
+docker compose up
 ```
 
-## 運作方式
+## 環境變數
 
-1. 在畫面底部的終端機輸入欄輸入議題或問題，按下 Enter 送出。
-2. 三台 MAGI 各自透過獨立的 API 呼叫同時開始審議。
-3. 每台電腦回應後立即停止閃爍並顯示結果，不等其他電腦。
-4. 三台全部完成後以多數決計算最終裁決：
-   - 合意多於否決 → **合意**
-   - 否決多於合意 → **否決**
-   - 票數相同 → **膠着**
-5. 點擊任一 MAGI 單元可查看其完整推理內容。
+| 變數名稱 | 說明 | 預設值 |
+|----------|------|--------|
+| `OPENAI_API_KEY` | OpenAI API 金鑰（MELCHIOR-1） | — |
+| `OPENAI_MODEL` | OpenAI 模型名稱 | `gpt-4o-mini` |
+| `ANTHROPIC_API_KEY` | Anthropic API 金鑰（BALTHASAR-2） | — |
+| `ANTHROPIC_MODEL` | Anthropic 模型名稱 | `claude-haiku-4-5` |
+| `GOOGLE_API_KEY` | Google AI API 金鑰（CASPER-3） | — |
+| `GOOGLE_MODEL` | Google 模型名稱 | `gemini-2.5-flash` |
 
-## 裁決對照
+## 使用方式
 
-| 顯示 | 含義 |
-|------|------|
-| 合 意 | 通過 |
-| 否 決 | 否決 |
-| 棄 権 | 棄權 |
-| 膠 着 | 僵局 |
-| 情 報 | 待機（尚無裁決） |
+1. 在輸入欄輸入是非題形式的議題，按下 **Enter** 送出
+2. 三台電腦同時開始獨立審議
+3. 率先完成的電腦立即停止閃爍並顯示結果
+4. 三台全部完成後，以多數決顯示最終裁決
+5. 點擊任一電腦可查看詳細推理說明
 
-## 授權聲明
+## 版權聲明
 
 本專案為粉絲向作品，向庵野秀明 / GAINAX / khara 所創作的《新世紀福音戰士》致敬。所有福音戰士相關名稱與概念均屬各著作權人所有。
+
+## 致謝
+
+### 贊助者
+
+特別感謝以下人士贊助 API Token 費用：
+
+- 天上天下唯我翻車大皮粉

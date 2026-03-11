@@ -3,6 +3,7 @@
 import { useState } from "react";
 import MagiDiagram from "@/components/MagiDiagram";
 import DeliberationInput from "@/components/DeliberationInput";
+import IntroModal from "@/components/IntroModal";
 import { MagiId, MagiResult, PartialResults, Vote } from "@/types/magi";
 
 const UNITS: MagiId[] = ["MELCHIOR", "BALTHASAR", "CASPER"];
@@ -20,6 +21,7 @@ function computeVerdict(results: PartialResults): (Vote | "DEADLOCK") | null {
 }
 
 export default function Home() {
+  const [showIntro, setShowIntro] = useState(true);
   const [topic, setTopic] = useState("");
   const [processingUnits, setProcessingUnits] = useState<Set<MagiId>>(new Set());
   const [partialResults, setPartialResults] = useState<PartialResults>({});
@@ -70,6 +72,8 @@ export default function Home() {
   };
 
   return (
+    <>
+      {showIntro && <IntroModal onClose={() => setShowIntro(false)} />}
     <main className="magi-main">
       <div className="system-border">
         <MagiDiagram
@@ -92,6 +96,15 @@ export default function Home() {
           isProcessing={isProcessing}
         />
       </div>
+      <a
+        href="https://github.com/hirakujira/MAGI/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="github-link"
+      >
+        ⌥ GitHub
+      </a>
     </main>
+    </>
   );
 }

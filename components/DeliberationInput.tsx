@@ -22,7 +22,7 @@ export default function DeliberationInput({
   return (
     <div className="input-container">
       <span className="input-row-label">access code:</span>
-      <div className="input-access-code" />
+      <span className="input-access-code">{"*".repeat(24)}</span>
 
       <span className="input-row-label">question:</span>
       <input

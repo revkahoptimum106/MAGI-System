@@ -41,8 +41,8 @@ interface Props {
 
 const SHAPES: Array<{ id: MagiId; label: string; cls: string }> = [
   { id: "BALTHASAR", label: "BALTHASAR • 2", cls: "wise-balthasar" },
-  { id: "CASPER",    label: "CASPER • 3",    cls: "wise-casper"    },
-  { id: "MELCHIOR",  label: "MELCHIOR • 1",  cls: "wise-melchior"  },
+  { id: "CASPER", label: "CASPER • 3", cls: "wise-casper" },
+  { id: "MELCHIOR", label: "MELCHIOR • 1", cls: "wise-melchior" },
 ];
 
 export default function MagiDiagram({ partialResults, processingUnits, finalVerdict }: Props) {
@@ -60,8 +60,8 @@ export default function MagiDiagram({ partialResults, processingUnits, finalVerd
       // 新しい審議が始まった時だけリセット
       setFlickerDelays({
         BALTHASAR: `${Math.floor(Math.random() * 180)}ms`,
-        CASPER:    `${Math.floor(Math.random() * 180)}ms`,
-        MELCHIOR:  `${Math.floor(Math.random() * 180)}ms`,
+        CASPER: `${Math.floor(Math.random() * 180)}ms`,
+        MELCHIOR: `${Math.floor(Math.random() * 180)}ms`,
       });
       setCode(rand(3));
       setExt(rand(4));
@@ -92,8 +92,8 @@ export default function MagiDiagram({ partialResults, processingUnits, finalVerd
         <div
           className={`magi-verdict${isProcessing ? " flicker" : ""}`}
           style={{
-            color: isProcessing ? "#ff8d00" : finalVerdict ? verdictColor(finalVerdict) : "#3caee0",
-            borderColor: isProcessing ? "#ff8d00" : finalVerdict ? verdictColor(finalVerdict) : "#3caee0",
+            color: isProcessing ? "#f7ca62" : finalVerdict ? verdictColor(finalVerdict) : "#3caee0",
+            borderColor: isProcessing ? "#f7ca62" : finalVerdict ? verdictColor(finalVerdict) : "#3caee0",
           }}
         >
           <div className="magi-verdict-inner">
@@ -103,14 +103,18 @@ export default function MagiDiagram({ partialResults, processingUnits, finalVerd
 
         {/* Decorative headers */}
         <div className="magi-header-deco left">
-          <hr /><hr />
+          <div className="magi-header-deco-bar" />
+          <div className="magi-header-deco-bar" />
           <span>提 訴</span>
-          <hr /><hr />
+          <div className="magi-header-deco-bar" />
+          <div className="magi-header-deco-bar" />
         </div>
         <div className="magi-header-deco right">
-          <hr /><hr />
+          <div className="magi-header-deco-bar" />
+          <div className="magi-header-deco-bar" />
           <span>決 議</span>
-          <hr /><hr />
+          <div className="magi-header-deco-bar" />
+          <div className="magi-header-deco-bar" />
         </div>
 
         {/* Three MAGI units */}

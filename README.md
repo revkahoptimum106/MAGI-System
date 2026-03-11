@@ -1,111 +1,94 @@
 # MAGI System
 
-**Language / 語言 / 言語:** [English](README.md) · [繁體中文](README.zh.md) · [日本語](README.ja.md)
+A fan-made web application inspired by the MAGI supercomputer from _Neon Genesis Evangelion_. Enter a yes/no question and watch three AI units deliberate simultaneously, then reach a verdict by majority vote.
+
+**[繁體中文](README.zh.md) | [日本語](README.ja.md)**
 
 ---
 
-A web-based simulation of the MAGI supercomputer from *Neon Genesis Evangelion*, powered by three real AI APIs deliberating in parallel.
+## The Three Units
 
-Each AI embodies one of the three MAGI units and independently votes APPROVE, REJECT, or ABSTAIN on any question posed. Results appear progressively as each unit finishes — no waiting for all three. The final verdict is determined by majority rule.
+| Unit          | AI Model         | Perspective                             |
+| ------------- | ---------------- | --------------------------------------- |
+| MELCHIOR • 1  | OpenAI GPT       | Scientist — logic and rational analysis |
+| BALTHASAR • 2 | Anthropic Claude | Mother — protection and care-oriented   |
+| CASPER • 3    | Google Gemini    | Woman — intuition and emotional insight |
 
-## MAGI Units
+## Verdicts
 
-| Unit | Number | AI Model | Persona |
-|------|--------|----------|---------|
-| MELCHIOR | 1 | OpenAI GPT-4o | Scientist — logical and analytical |
-| BALTHASAR | 2 | Anthropic Claude | Mother — protective and caring |
-| CASPER | 3 | Google Gemini | Woman — intuitive and emotional |
+| Result       | Meaning                   |
+| ------------ | ------------------------- |
+| **APPROVE**  | Majority voted yes        |
+| **REJECT**   | Majority voted no         |
+| **ABSTAIN**  | All three units abstained |
+| **DEADLOCK** | No majority reached       |
 
-## Tech Stack
+## Getting Started
 
-- **Next.js 16** (App Router, TypeScript)
-- **Tailwind CSS v4**
-- OpenAI SDK, Anthropic SDK, Google Generative AI SDK
-- Three parallel independent fetches — each unit updates the UI as soon as it responds
+### Prerequisites
 
-## Setup
+You will need API keys for the following services:
 
-### Option A: Docker (recommended)
+- [OpenAI](https://platform.openai.com/api-keys) — for MELCHIOR-1
+- [Anthropic](https://console.anthropic.com/settings/keys) — for BALTHASAR-2
+- [Google AI Studio](https://aistudio.google.com/apikey) — for CASPER-3
+
+### Local Development
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/hirakujira/MAGI.git
+cd MAGI
+
+# 2. Set up environment variables
 cp .env.local.example .env.local
-# Fill in your API keys in .env.local
-docker compose up -d
-```
+# Edit .env.local and fill in your API keys
 
-Open [http://localhost:3000](http://localhost:3000).
-
-```bash
-# Rebuild after code changes
-docker compose up -d --build
-
-# Stop
-docker compose down
-```
-
-### Option B: Local development
-
-**1. Install dependencies**
-
-```bash
+# 3. Install dependencies
 npm install
-```
 
-**2. Configure API keys**
-
-```bash
-cp .env.local.example .env.local
-```
-
-```env
-OPENAI_API_KEY=your_openai_api_key_here
-ANTHROPIC_API_KEY=your_anthropic_api_key_here
-GOOGLE_API_KEY=your_google_api_key_here
-```
-
-- OpenAI API key: https://platform.openai.com/api-keys
-- Anthropic API key: https://console.anthropic.com/settings/keys
-- Google AI API key: https://aistudio.google.com/apikey
-
-**3. Run the development server**
-
-```bash
+# 4. Start the development server
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## Model Customization
+### Docker
 
-Override the default model for any unit by adding these optional variables to `.env.local`:
+```bash
+# Copy and configure your environment variables first
+cp .env.local.example .env.local
 
-```env
-OPENAI_MODEL=gpt-4o          # default: gpt-4o
-ANTHROPIC_MODEL=claude-opus-4-5  # default: claude-opus-4-5
-GOOGLE_MODEL=gemini-2.5-flash    # default: gemini-2.5-flash
+docker compose up
 ```
 
-## How It Works
+## Environment Variables
 
-1. Enter a question or proposal in the terminal input at the bottom of the screen and press Enter.
-2. All three MAGI units are queried simultaneously, each via its own independent API call.
-3. Each unit's result appears as soon as it arrives — the flicker animation stops and the vote is revealed.
-4. The final verdict is computed once all three units have responded:
-   - More APPROVE than REJECT → **合意 (APPROVE)**
-   - More REJECT than APPROVE → **否決 (REJECT)**
-   - Tie → **膠着 (DEADLOCK)**
-5. Click any MAGI unit to read its full reasoning.
+| Variable            | Description                     | Default            |
+| ------------------- | ------------------------------- | ------------------ |
+| `OPENAI_API_KEY`    | OpenAI API key (MELCHIOR-1)     | —                  |
+| `OPENAI_MODEL`      | OpenAI model name               | `gpt-4o-mini`      |
+| `ANTHROPIC_API_KEY` | Anthropic API key (BALTHASAR-2) | —                  |
+| `ANTHROPIC_MODEL`   | Anthropic model name            | `claude-haiku-4-5` |
+| `GOOGLE_API_KEY`    | Google AI API key (CASPER-3)    | —                  |
+| `GOOGLE_MODEL`      | Google model name               | `gemini-2.5-flash` |
 
-## Verdict Reference
+## How to Use
 
-| Display | Meaning |
-|---------|---------|
-| 合 意 | Approved |
-| 否 決 | Rejected |
-| 棄 権 | Abstained |
-| 膠 着 | Deadlock |
-| 情 報 | Standby (no verdict yet) |
+1. Type a yes/no question in the input field and press **Enter**
+2. All three units begin deliberating simultaneously and independently
+3. Each unit stops flickering and shows its result as soon as it finishes
+4. The final verdict is determined by majority vote once all three complete
+5. Click any unit to read its detailed reasoning
 
-## License
+## Copyright Notice
 
-This project is a fan-made tribute to *Neon Genesis Evangelion* by Hideaki Anno / GAINAX / khara. All Evangelion-related names and concepts belong to their respective copyright holders.
+This project is a fan work created as a tribute to _Neon Genesis Evangelion_ by Hideaki Anno / GAINAX / khara. All Evangelion-related names and concepts are the property of their respective copyright holders.
+
+## Acknowledgements
+
+### Sponsors
+
+Special thanks to the following for sponsoring API token costs:
+
+- 天上天下唯我翻車大皮粉

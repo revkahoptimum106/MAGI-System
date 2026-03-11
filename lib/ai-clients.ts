@@ -16,7 +16,7 @@ function parseVoteResponse(text: string): { reasoning: string; vote: Vote } {
 export async function queryMelchior(topic: string): Promise<{ reasoning: string; vote: Vote }> {
   const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   const response = await client.chat.completions.create({
-    model: process.env.OPENAI_MODEL ?? "gpt-4o",
+    model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
     messages: [
       { role: "system", content: MELCHIOR_PROMPT },
       { role: "user", content: topic },
@@ -31,7 +31,7 @@ export async function queryMelchior(topic: string): Promise<{ reasoning: string;
 export async function queryBalthasar(topic: string): Promise<{ reasoning: string; vote: Vote }> {
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
   const response = await client.messages.create({
-    model: process.env.ANTHROPIC_MODEL ?? "claude-sonnet-4-5",
+    model: process.env.ANTHROPIC_MODEL ?? "claude-haiku-4-5",
     max_tokens: 300,
     system: BALTHASAR_PROMPT,
     messages: [{ role: "user", content: topic }],

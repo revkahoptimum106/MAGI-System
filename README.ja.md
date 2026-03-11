@@ -1,111 +1,94 @@
 # MAGI システム
 
-**Language / 語言 / 言語:** [English](README.md) · [繁體中文](README.zh.md) · [日本語](README.ja.md)
+『新世紀エヴァンゲリオン』に登場する超高性能コンピュータ「MAGI」にインスパイアされたファン制作の Web アプリケーションです。賛否を問う形式の議題を入力すると、3 台の AI ユニットが同時に審議を行い、多数決で最終決定を下します。
+
+**[English](README.md) | [中文](README.zh.md)**
 
 ---
 
-『新世紀エヴァンゲリオン』に登場する超高性能コンピュータ「MAGI」のウェブ版シミュレーションです。3つのAI APIが並列で審議を行います。
+## 3 台のユニット
 
-各AIはMAGIの1ユニットとして機能し、入力された議題に対して独立して投票（合意／否決／棄権）します。各ユニットの結果は返ってきた順に即座に表示されます。最終決定は多数決で決まります。
+| ユニット      | AI モデル        | 視点                     |
+| ------------- | ---------------- | ------------------------ |
+| MELCHIOR • 1  | OpenAI GPT       | 科学者——論理・合理的分析 |
+| BALTHASAR • 2 | Anthropic Claude | 母親——保護・ケア志向     |
+| CASPER • 3    | Google Gemini    | 女性——直感・感情的洞察   |
 
-## MAGI ユニット
+## 決定結果
 
-| ユニット | 番号 | AI モデル | 人格 |
-|----------|------|-----------|------|
-| MELCHIOR | 1 | OpenAI GPT-4o | 科学者——論理的・分析的 |
-| BALTHASAR | 2 | Anthropic Claude | 母親——保護・思いやり重視 |
-| CASPER | 3 | Google Gemini | 女性——直感・感情的洞察 |
+| 結果                 | 説明               |
+| -------------------- | ------------------ |
+| **合意（APPROVE）**  | 多数が賛成         |
+| **否決（REJECT）**   | 多数が反対         |
+| **棄権（ABSTAIN）**  | 3 台すべてが棄権   |
+| **膠着（DEADLOCK）** | 多数決が成立しない |
 
-## 技術スタック
+## はじめに
 
-- **Next.js 16**（App Router、TypeScript）
-- **Tailwind CSS v4**
-- OpenAI SDK、Anthropic SDK、Google Generative AI SDK
-- 3本の独立した並列 fetch — 各ユニットが応答した瞬間にUIを更新
+### 必要なもの
 
-## 起動方法
+以下のサービスの API キーが必要です：
 
-### 方法 A：Docker（推奨）
+- [OpenAI](https://platform.openai.com/api-keys) — MELCHIOR-1 用
+- [Anthropic](https://console.anthropic.com/settings/keys) — BALTHASAR-2 用
+- [Google AI Studio](https://aistudio.google.com/apikey) — CASPER-3 用
+
+### ローカル開発
 
 ```bash
+# 1. リポジトリをクローン
+git clone https://github.com/hirakujira/MAGI.git
+cd MAGI
+
+# 2. 環境変数を設定
 cp .env.local.example .env.local
-# .env.local に APIキーを入力
-docker compose up -d
-```
+# .env.local を編集して API キーを入力
 
-ブラウザで [http://localhost:3000](http://localhost:3000) を開いてください。
-
-```bash
-# コード変更後の再ビルド
-docker compose up -d --build
-
-# 停止
-docker compose down
-```
-
-### 方法 B：ローカル開発
-
-**1. 依存関係のインストール**
-
-```bash
+# 3. 依存パッケージをインストール
 npm install
-```
 
-**2. APIキーの設定**
-
-```bash
-cp .env.local.example .env.local
-```
-
-```env
-OPENAI_API_KEY=your_openai_api_key_here
-ANTHROPIC_API_KEY=your_anthropic_api_key_here
-GOOGLE_API_KEY=your_google_api_key_here
-```
-
-- OpenAI APIキー：https://platform.openai.com/api-keys
-- Anthropic APIキー：https://console.anthropic.com/settings/keys
-- Google AI APIキー：https://aistudio.google.com/apikey
-
-**3. 開発サーバーの起動**
-
-```bash
+# 4. 開発サーバーを起動
 npm run dev
 ```
 
-ブラウザで [http://localhost:3000](http://localhost:3000) を開いてください。
+[http://localhost:3000](http://localhost:3000) をブラウザで開いてください。
 
-## モデルのカスタマイズ
+### Docker
 
-`.env.local` に以下の任意の変数を追加することで、各ユニットのモデルを変更できます：
+```bash
+# 先に環境変数を設定してください
+cp .env.local.example .env.local
 
-```env
-OPENAI_MODEL=gpt-4o              # デフォルト: gpt-4o
-ANTHROPIC_MODEL=claude-opus-4-5  # デフォルト: claude-opus-4-5
-GOOGLE_MODEL=gemini-2.5-flash    # デフォルト: gemini-2.5-flash
+docker compose up
 ```
 
-## 動作の仕組み
+## 環境変数
 
-1. 画面下部のターミナル入力欄に議題や質問を入力し、Enterキーで送信します。
-2. 3つのMAGIユニットがそれぞれ独立したAPIコールで同時に審議を開始します。
-3. 各ユニットは応答が届いた瞬間にフリッカーが止まり結果が表示されます。他のユニットの完了を待ちません。
-4. 全ユニットの応答が揃った時点で多数決により最終決定が計算されます：
-   - 合意が否決より多い → **合意**
-   - 否決が合意より多い → **否決**
-   - 同数 → **膠着**
-5. 審議終了後、いずれかのMAGIユニットをクリックすると詳細な判断理由を確認できます。
+| 変数名              | 説明                              | デフォルト         |
+| ------------------- | --------------------------------- | ------------------ |
+| `OPENAI_API_KEY`    | OpenAI API キー（MELCHIOR-1）     | —                  |
+| `OPENAI_MODEL`      | OpenAI モデル名                   | `gpt-4o-mini`      |
+| `ANTHROPIC_API_KEY` | Anthropic API キー（BALTHASAR-2） | —                  |
+| `ANTHROPIC_MODEL`   | Anthropic モデル名                | `claude-haiku-4-5` |
+| `GOOGLE_API_KEY`    | Google AI API キー（CASPER-3）    | —                  |
+| `GOOGLE_MODEL`      | Google モデル名                   | `gemini-2.5-flash` |
 
-## 決定結果の一覧
+## 使い方
 
-| 表示 | 意味 |
-|------|------|
-| 合 意 | 承認 |
-| 否 決 | 否決 |
-| 棄 権 | 棄権 |
-| 膠 着 | 膠着状態 |
-| 情 報 | 待機中（まだ決定なし） |
+1. 入力欄に賛否を問う形式の議題を入力し、**Enter** キーで送信
+2. 3 台のユニットが同時に独立して審議を開始
+3. 応答が届いたユニットから順にフリッカーが止まり、結果を表示
+4. 全ユニットが完了した時点で、多数決により最終決定を表示
+5. 各ユニットをクリックすると詳細な判断理由を確認できます
 
-## ライセンス
+## 著作権表示
 
-本プロジェクトは庵野秀明 / GAINAX / khara による『新世紀エヴァンゲリオン』へのファン向けトリビュート作品です。エヴァンゲリオンに関連するすべての名称および概念は各著作権者に帰属します。
+本プロジェクトはファン制作の作品であり、庵野秀明 / GAINAX / khara による『新世紀エヴァンゲリオン』へのオマージュとして制作されました。エヴァンゲリオンに関するすべての名称および概念は、各著作権者に帰属します。
+
+## 謝辞
+
+### スポンサー
+
+API トークン費用のご支援をいただいた以下の方々に感謝申し上げます：
+
+- 天上天下唯我翻車大皮粉
