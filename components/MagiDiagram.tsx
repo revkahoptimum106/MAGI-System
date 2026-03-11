@@ -12,7 +12,7 @@ function voteBackground(vote: Vote | null): string {
 
 function verdictText(v: string): string {
   const map: Record<string, string> = {
-    APPROVE: "合 意",
+    APPROVE: "承 認",
     REJECT: "否 決",
     ABSTAIN: "棄 権",
     DEADLOCK: "膠 着",

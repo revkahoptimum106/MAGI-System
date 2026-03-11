@@ -108,8 +108,8 @@ body {
 .magi-grid {
   display: grid;
   grid-template-columns: 20px 2fr 0.5fr 1fr 0.5fr 2fr 20px;
-  grid-template-rows: 20px 2fr 2fr 1fr 3fr 20px;
-  aspect-ratio: 2 / 1;
+  grid-template-rows: 20px 5fr 3fr 1fr 4fr 20px;
+  aspect-ratio: 3 / 2;
   container-type: size;
   border: 2px solid var(--amber);
   background: black;
@@ -123,8 +123,8 @@ body {
   margin: -10%;
   z-index: 1;
 }
-.conn-cb { grid-column: 3; grid-row: 4; transform: rotate(-54deg); }
-.conn-bm { grid-column: 5; grid-row: 4; transform: rotate(54deg);  }
+.conn-cb { grid-column: 3; grid-row: 4; transform: translate(-25px, -40px) rotate(-54deg); }
+.conn-bm { grid-column: 5; grid-row: 4; transform: translate(25px, -40px) rotate(54deg);  }
 .conn-cm { grid-column: 4; grid-row: 5; }
 
 /* ── System status block ── */
@@ -133,7 +133,7 @@ body {
   grid-row: 3;
   font-family: var(--font-sans);
   font-weight: bold;
-  font-size: 3cqmin;
+  font-size: 4cqmin;
   color: var(--amber);
   display: flex;
   flex-direction: column;
@@ -141,10 +141,10 @@ body {
   gap: 0.3em;
   padding-left: 0.5em;
 }
-.magi-sys-status > div:first-child { font-size: 5cqmin; }
+.magi-sys-status > div:first-child { font-size: 8cqmin; }
 .magi-sys-status-inner {
-  margin-left: 30px;
-  margin-bottom: 30px;
+  margin-left: 60px;
+  margin-bottom: 60px;
 }
 
 /* ── Verdict badge ── */
@@ -198,7 +198,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family: Helvetica, sans-serif;
-  font-size: 8cqmin;
+  font-size: 6cqmin;
   font-weight: bold;
   color: black;
   /* background set via CSS variable so animation can override it */
@@ -238,10 +238,10 @@ body {
 .wise-balthasar {
   grid-column: 3 / 6;
   grid-row: 2 / 4;
-  clip-path: polygon(0 0, 100% 0, 100% 80%, 75% 100%, 25% 100%, 0 80%);
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 75% 100%, 25% 100%, 0 88%);
 }
 .wise-balthasar .wise-inner {
-  clip-path: polygon(0 0, 100% 0, 100% 80%, 75% 100%, 25% 100%, 0 80%);
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 75% 100%, 25% 100%, 0 88%);
 }
 
 /* ── CASPER — bottom left, pentagon ── */

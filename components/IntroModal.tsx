@@ -102,7 +102,7 @@ export default function IntroModal({ onClose }: Props) {
           </ol>
 
           <div className="intro-verdict-ref">
-            <span style={{ color: "#52e691" }}>合意</span>
+            <span style={{ color: "#52e691" }}>承認</span>
             <span style={{ color: "#a41413" }}>否決</span>
             <span style={{ color: "#3caee0" }}>棄権</span>
             <span style={{ color: "#ff8d00" }}>膠着</span>
