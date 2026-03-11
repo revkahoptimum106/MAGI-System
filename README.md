@@ -20,7 +20,7 @@ A fan-made web application inspired by the MAGI supercomputer from _Neon Genesis
 | ------------ | ------------------------- |
 | **APPROVE**  | Majority voted yes        |
 | **REJECT**   | Majority voted no         |
-| **ABSTAIN**  | All three units abstained |
+| **ABSTAIN**  | At least two units abstained |
 | **DEADLOCK** | No majority reached       |
 
 ## Getting Started

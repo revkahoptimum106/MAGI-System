@@ -14,9 +14,9 @@ function computeVerdict(results: PartialResults): (Vote | "DEADLOCK") | null {
   const approveCount = all.filter((r) => r.vote === "APPROVE").length;
   const rejectCount  = all.filter((r) => r.vote === "REJECT").length;
   const abstainCount = all.filter((r) => r.vote === "ABSTAIN").length;
+  if (abstainCount >= 2) return "ABSTAIN";
   if (approveCount > rejectCount) return "APPROVE";
   if (rejectCount  > approveCount) return "REJECT";
-  if (abstainCount >= 2) return "ABSTAIN";
   return "DEADLOCK";
 }
 
