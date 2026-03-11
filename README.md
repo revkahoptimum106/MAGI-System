@@ -4,6 +4,8 @@ A fan-made web application inspired by the MAGI supercomputer from _Neon Genesis
 
 **[繁體中文](README.zh.md) | [日本語](README.ja.md)**
 
+![Demo](demo.gif)
+
 ---
 
 ## The Three Units

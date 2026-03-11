@@ -4,6 +4,8 @@
 
 **[English](README.md) | [日本語](README.ja.md)**
 
+![Demo](demo.gif)
+
 ---
 
 ## 三台電腦
