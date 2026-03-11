@@ -46,7 +46,10 @@ export async function queryCasper(topic: string): Promise<{ reasoning: string; v
     model: process.env.GOOGLE_MODEL ?? "gemini-2.5-flash",
     systemInstruction: CASPER_PROMPT,
   });
-  const result = await model.generateContent(topic);
+  const result = await model.generateContent({
+    contents: [{ role: "user", parts: [{ text: topic }] }],
+    generationConfig: { thinkingConfig: { thinkingBudget: 0 } } as object,
+  });
   const text = result.response.text();
   return parseVoteResponse(text);
 }
