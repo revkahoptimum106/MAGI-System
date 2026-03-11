@@ -5,6 +5,7 @@ import MagiDiagram from "@/components/MagiDiagram";
 import DeliberationInput from "@/components/DeliberationInput";
 import IntroModal from "@/components/IntroModal";
 import { MagiId, MagiResult, PartialResults, Vote } from "@/types/magi";
+import { deliberateMelchior, deliberateBalthasar, deliberateCasper } from "@/app/actions";
 
 const UNITS: MagiId[] = ["MELCHIOR", "BALTHASAR", "CASPER"];
 
@@ -43,28 +44,16 @@ export default function Home() {
     setPartialResults({});
     setError(null);
 
-    const fetchUnit = async (unit: MagiId) => {
+    const actions = {
+      MELCHIOR:  deliberateMelchior,
+      BALTHASAR: deliberateBalthasar,
+      CASPER:    deliberateCasper,
+    };
+
+    const runUnit = async (unit: MagiId) => {
       try {
-        const res = await fetch("/api/deliberate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ topic, unit }),
-        });
-        if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.error || "Unknown error");
-        }
-        const result: MagiResult = await res.json();
+        const result = await actions[unit](topic);
         setPartialResults((prev) => ({ ...prev, [unit]: result }));
-      } catch (err) {
-        const fallback: MagiResult = {
-          id: unit,
-          number: unit === "MELCHIOR" ? 1 : unit === "BALTHASAR" ? 2 : 3,
-          reasoning: "SYSTEM ERROR: Connection lost",
-          vote: "ABSTAIN",
-          error: err instanceof Error ? err.message : "Unknown error",
-        };
-        setPartialResults((prev) => ({ ...prev, [unit]: fallback }));
       } finally {
         setProcessingUnits((prev) => {
           const next = new Set(prev);
@@ -74,7 +63,7 @@ export default function Home() {
       }
     };
 
-    UNITS.forEach((unit) => fetchUnit(unit));
+    UNITS.forEach((unit) => runUnit(unit));
   };
 
   return (
