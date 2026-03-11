@@ -4,17 +4,17 @@
 
 ---
 
-A web-based simulation of the MAGI supercomputer from *Neon Genesis Evangelion*, powered by three real AI APIs deliberating in parallel.
+A web-based simulation of the MAGI supercomputer from _Neon Genesis Evangelion_, powered by three real AI APIs deliberating in parallel.
 
 Each AI embodies one of the three MAGI units and independently votes APPROVE, REJECT, or ABSTAIN on any question posed. The final verdict is determined by majority rule.
 
 ## MAGI Units
 
-| Unit | Number | AI Model | Persona |
-|------|--------|----------|---------|
-| MELCHIOR | 1 | OpenAI GPT-4o | Scientist — logical and analytical |
-| BALTHASAR | 2 | Anthropic Claude | Mother — protective and caring |
-| CASPER | 3 | Google Gemini | Woman — intuitive and emotional |
+| Unit      | Number | AI Model         | Persona                            |
+| --------- | ------ | ---------------- | ---------------------------------- |
+| MELCHIOR  | 1      | OpenAI GPT-4o    | Scientist — logical and analytical |
+| BALTHASAR | 2      | Anthropic Claude | Mother — protective and caring     |
+| CASPER    | 3      | Google Gemini    | Woman — intuitive and emotional    |
 
 ## Tech Stack
 
@@ -64,20 +64,20 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 3. Each unit independently responds with a vote (APPROVE / REJECT / ABSTAIN) and reasoning.
 4. The final verdict is computed by majority rule:
    - More APPROVE than REJECT → **合意 (APPROVE)**
-   - More REJECT than APPROVE → **拒絶 (REJECT)**
+   - More REJECT than APPROVE → **否決 (REJECT)**
    - Tie → **膠着 (DEADLOCK)**
 5. Click any MAGI unit after deliberation to read its full reasoning.
 
 ## Verdict Reference
 
-| Display | Meaning |
-|---------|---------|
-| 合 意 | Approved |
-| 拒 絶 | Rejected |
-| 棄 権 | Abstained |
-| 膠 着 | Deadlock |
-| 情 報 | Standby (no verdict yet) |
+| Display | Meaning                  |
+| ------- | ------------------------ |
+| 合 意   | Approved                 |
+| 拒 絶   | Rejected                 |
+| 棄 権   | Abstained                |
+| 膠 着   | Deadlock                 |
+| 情 報   | Standby (no verdict yet) |
 
 ## License
 
-This project is a fan-made tribute to *Neon Genesis Evangelion* by Hideaki Anno / GAINAX / khara. All Evangelion-related names and concepts belong to their respective copyright holders.
+This project is a fan-made tribute to _Neon Genesis Evangelion_ by Hideaki Anno / GAINAX / khara. All Evangelion-related names and concepts belong to their respective copyright holders.

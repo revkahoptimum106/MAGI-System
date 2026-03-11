@@ -1,6 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap");
 @import "tailwindcss";
 
+@font-face {
+  font-family: "TsukuhouShogoMin";
+  src: url("/fonts/TsukuhouShogoMin.woff2") format("woff2");
+  font-display: swap;
+}
+
 /* ── Base ── */
 :root {
   --amber: #ff8d00;
@@ -11,6 +17,7 @@
   --bg: #050505;
   --font-mono: "Share Tech Mono", "Lucida Console", monospace;
   --font-title: "Orbitron", Helvetica, sans-serif;
+  --font-ja: "TsukuhouShogoMin", "Hiragino Mincho ProN", serif;
 }
 
 html {
@@ -53,8 +60,13 @@ body {
   50%  { background: black; color: black; border-color: black; }
 }
 
-/* Applied to .wise-inner — animation origin overrides author declarations */
+/* verdict badge flicker */
 .flicker {
+  animation: flicker-animation 0.5s infinite step-end;
+}
+
+/* wise-man unit flicker — twice as fast */
+.flicker-fast {
   animation: flicker-animation 0.25s infinite step-end;
 }
 
@@ -150,7 +162,7 @@ body {
   padding: 4px 14px;
   font-size: 8cqh;
   font-weight: bold;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-ja);
   white-space: nowrap;
 }
 
@@ -162,7 +174,7 @@ body {
   text-align: center;
   font-size: 9cqh;
   font-weight: bold;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-ja);
   align-self: center;
   justify-self: center;
   z-index: 3;
@@ -212,7 +224,7 @@ body {
   color: var(--amber);
   font-size: 10cqh;
   font-weight: bold;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-ja);
   display: flex;
   justify-content: center;
   transform: scaleX(2);
@@ -305,7 +317,7 @@ body {
 .modal-vote {
   font-size: 22px;
   font-weight: bold;
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-ja);
   letter-spacing: 4px;
   border: 2px solid;
   padding: 6px 16px;
@@ -317,6 +329,7 @@ body {
   font-size: 13px;
   line-height: 1.8;
   color: #ddd;
+  font-family: var(--font-ja);
 }
 
 .modal-error {

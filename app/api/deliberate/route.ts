@@ -1,72 +1,38 @@
 import { NextRequest, NextResponse } from "next/server";
 import { queryMelchior, queryBalthasar, queryCasper } from "@/lib/ai-clients";
-import { DeliberationRequest, DeliberationResponse, MagiResult, Vote } from "@/types/magi";
+import { MagiId, MagiResult } from "@/types/magi";
 
-function computeVerdict(results: MagiResult[]): Vote | "DEADLOCK" {
-  const votes = results.map((r) => r.vote);
-  const approveCount = votes.filter((v) => v === "APPROVE").length;
-  const rejectCount = votes.filter((v) => v === "REJECT").length;
-  if (approveCount > rejectCount) return "APPROVE";
-  if (rejectCount > approveCount) return "REJECT";
-  const abstainCount = votes.filter((v) => v === "ABSTAIN").length;
-  if (abstainCount >= 2) return "ABSTAIN";
-  return "DEADLOCK";
-}
+const UNITS: Record<MagiId, { number: 1 | 2 | 3; query: (t: string) => Promise<{ reasoning: string; vote: import("@/types/magi").Vote }> }> = {
+  MELCHIOR:  { number: 1, query: queryMelchior  },
+  BALTHASAR: { number: 2, query: queryBalthasar },
+  CASPER:    { number: 3, query: queryCasper    },
+};
 
 export async function POST(req: NextRequest) {
-  const body: DeliberationRequest = await req.json();
-  const { topic } = body;
+  const body = await req.json();
+  const { topic, unit } = body as { topic: string; unit: MagiId };
 
   if (!topic?.trim()) {
     return NextResponse.json({ error: "Topic is required" }, { status: 400 });
   }
+  if (!unit || !(unit in UNITS)) {
+    return NextResponse.json({ error: "Invalid unit" }, { status: 400 });
+  }
 
-  const [melchiorResult, balthasarResult, casperResult] = await Promise.allSettled([
-    queryMelchior(topic),
-    queryBalthasar(topic),
-    queryCasper(topic),
-  ]);
+  const { number, query } = UNITS[unit];
 
-  const results: MagiResult[] = [
-    {
-      id: "MELCHIOR",
-      number: 1,
-      reasoning:
-        melchiorResult.status === "fulfilled"
-          ? melchiorResult.value.reasoning
-          : "SYSTEM ERROR: Connection lost",
-      vote:
-        melchiorResult.status === "fulfilled" ? melchiorResult.value.vote : "ABSTAIN",
-      error: melchiorResult.status === "rejected" ? String(melchiorResult.reason) : undefined,
-    },
-    {
-      id: "BALTHASAR",
-      number: 2,
-      reasoning:
-        balthasarResult.status === "fulfilled"
-          ? balthasarResult.value.reasoning
-          : "SYSTEM ERROR: Connection lost",
-      vote:
-        balthasarResult.status === "fulfilled" ? balthasarResult.value.vote : "ABSTAIN",
-      error: balthasarResult.status === "rejected" ? String(balthasarResult.reason) : undefined,
-    },
-    {
-      id: "CASPER",
-      number: 3,
-      reasoning:
-        casperResult.status === "fulfilled"
-          ? casperResult.value.reasoning
-          : "SYSTEM ERROR: Connection lost",
-      vote: casperResult.status === "fulfilled" ? casperResult.value.vote : "ABSTAIN",
-      error: casperResult.status === "rejected" ? String(casperResult.reason) : undefined,
-    },
-  ];
-
-  const response: DeliberationResponse = {
-    results,
-    finalVerdict: computeVerdict(results),
-    topic,
-  };
-
-  return NextResponse.json(response);
+  try {
+    const { reasoning, vote } = await query(topic);
+    const result: MagiResult = { id: unit, number, reasoning, vote };
+    return NextResponse.json(result);
+  } catch (err) {
+    const result: MagiResult = {
+      id: unit,
+      number,
+      reasoning: "SYSTEM ERROR: Connection lost",
+      vote: "ABSTAIN",
+      error: String(err),
+    };
+    return NextResponse.json(result);
+  }
 }

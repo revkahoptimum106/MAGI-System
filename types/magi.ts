@@ -18,4 +18,7 @@ export interface DeliberationResponse {
 
 export interface DeliberationRequest {
   topic: string;
+  unit: MagiId;
 }
+
+export type PartialResults = Partial<Record<MagiId, MagiResult>>;
