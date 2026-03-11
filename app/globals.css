@@ -132,7 +132,7 @@ body {
   grid-column: 2;
   grid-row: 3;
   font-family: var(--font-mono);
-  font-size: 3cqh;
+  font-size: 3cqmin;
   color: var(--amber);
   display: flex;
   flex-direction: column;
@@ -140,7 +140,7 @@ body {
   gap: 0.3em;
   padding-left: 0.5em;
 }
-.magi-sys-status > div:first-child { font-size: 5cqh; }
+.magi-sys-status > div:first-child { font-size: 5cqmin; }
 .magi-sys-status-inner {
   margin-left: 30px;
 }
@@ -160,7 +160,7 @@ body {
 .magi-verdict-inner {
   border: 2px solid currentColor;
   padding: 4px 14px;
-  font-size: 8cqh;
+  font-size: 8cqmin;
   font-weight: bold;
   font-family: var(--font-ja);
   white-space: nowrap;
@@ -172,7 +172,7 @@ body {
   grid-row: 4;
   color: var(--amber);
   text-align: center;
-  font-size: 9cqh;
+  font-size: 9cqmin;
   font-weight: bold;
   font-family: var(--font-ja);
   align-self: center;
@@ -196,7 +196,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family: Helvetica, sans-serif;
-  font-size: 8cqh;
+  font-size: 8cqmin;
   font-weight: bold;
   color: black;
   /* background set via CSS variable so animation can override it */
@@ -222,7 +222,7 @@ body {
 
 .magi-header-deco span {
   color: var(--amber);
-  font-size: 10cqh;
+  font-size: 10cqmin;
   font-weight: bold;
   font-family: var(--font-ja);
   display: flex;
@@ -398,9 +398,4 @@ body {
 .input-question::placeholder { color: var(--amber-dim); opacity: 0.5; }
 .input-question:disabled { opacity: 0.4; cursor: not-allowed; }
 
-/* ── Responsive ── */
-@media (max-width: 600px) {
-  .magi-grid { aspect-ratio: unset; min-height: 320px; }
-  .input-container { grid-template-columns: 1fr; }
-  .input-row-label { display: none; }
-}
+

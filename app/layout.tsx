@@ -1,9 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "MAGI SYSTEM — NERV",
   description: "MAGI Supercomputer Deliberation Interface",
+};
+
+export const viewport: Viewport = {
+  width: 1024,
 };
 
 export default function RootLayout({
