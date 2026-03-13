@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 interface Lang {
   units: [string, string, string];
@@ -60,13 +60,16 @@ interface Props {
 }
 
 export default function IntroModal({ onClose }: Props) {
-  const [lang, setLang] = useState<Lang>(LANGS.en);
-
-  useEffect(() => {
-    const code = navigator.language || "";
-    if (code.startsWith("zh")) setLang(LANGS.zh);
-    else if (code.startsWith("ja")) setLang(LANGS.ja);
-  }, []);
+  const lang = useSyncExternalStore(
+    () => () => {},
+    () => {
+      const code = navigator.language || "";
+      if (code.startsWith("zh")) return LANGS.zh;
+      if (code.startsWith("ja")) return LANGS.ja;
+      return LANGS.en;
+    },
+    () => LANGS.en,
+  );
 
   return (
     <div className="modal-overlay">

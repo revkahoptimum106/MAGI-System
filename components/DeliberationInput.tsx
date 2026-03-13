@@ -1,5 +1,15 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
+
+const PLACEHOLDERS: Record<string, string> = {
+  zh: "輸入議題，按 Enter 送出...",
+  ja: "議題を入力して Enter キーで送信...",
+  en: "type question and press Enter...",
+};
+
+
+
 interface DeliberationInputProps {
   topic: string;
   onTopicChange: (v: string) => void;
@@ -13,6 +23,17 @@ export default function DeliberationInput({
   onSubmit,
   isProcessing,
 }: DeliberationInputProps) {
+  const placeholder = useSyncExternalStore(
+    () => () => {},
+    () => {
+      const code = navigator.language || "";
+      if (code.startsWith("zh")) return PLACEHOLDERS.zh;
+      if (code.startsWith("ja")) return PLACEHOLDERS.ja;
+      return PLACEHOLDERS.en;
+    },
+    () => PLACEHOLDERS.en,
+  );
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !isProcessing && topic.trim()) {
       onSubmit();
@@ -31,7 +52,7 @@ export default function DeliberationInput({
         value={topic}
         onChange={(e) => onTopicChange(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="type question and press Enter..."
+        placeholder={placeholder}
         disabled={isProcessing}
         maxLength={500}
         autoComplete="off"

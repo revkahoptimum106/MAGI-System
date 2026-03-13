@@ -143,7 +143,8 @@ body {
 }
 .magi-sys-status > div:first-child { font-size: 8cqmin; }
 .magi-sys-status-inner {
-  margin-left: 60px;
+  margin-left: auto;
+  margin-right: 2cqmin;
   margin-bottom: 60px;
 }
 

@@ -18,12 +18,12 @@ A fan-made web application inspired by the MAGI supercomputer from _Neon Genesis
 
 ## Verdicts
 
-| Result       | Meaning                   |
-| ------------ | ------------------------- |
-| **APPROVE**  | Majority voted yes        |
-| **REJECT**   | Majority voted no         |
-| **ABSTAIN**  | At least two units abstained |
-| **DEADLOCK** | No majority reached       |
+| Result               | Meaning                      |
+| -------------------- | ---------------------------- |
+| **承認（APPROVE）**  | Majority voted yes           |
+| **否決（REJECT）**   | Majority voted no            |
+| **棄権（ABSTAIN）**  | At least two units abstained |
+| **膠着（DEADLOCK）** | No majority reached          |
 
 > **Critical Matter**: If two or more units assess the topic as irreversible and potentially catastrophic (e.g. self-destruction, killing), the system automatically switches to a unanimous rule — all three units must approve for the action to proceed; any dissent or abstention results in rejection. Click any unit to see whether it flagged the topic as critical.
 

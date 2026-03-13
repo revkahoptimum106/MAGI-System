@@ -10,20 +10,20 @@
 
 ## 三台電腦
 
-| 電腦 | AI 模型 | 視角 |
-|------|---------|------|
-| MELCHIOR • 1 | OpenAI GPT | 科學家——邏輯、理性分析 |
-| BALTHASAR • 2 | Anthropic Claude | 母親——保護、關懷導向 |
-| CASPER • 3 | Google Gemini | 女性——直覺、情感洞察 |
+| 電腦          | AI 模型          | 視角                   |
+| ------------- | ---------------- | ---------------------- |
+| MELCHIOR • 1  | OpenAI GPT       | 科學家——邏輯、理性分析 |
+| BALTHASAR • 2 | Anthropic Claude | 母親——保護、關懷導向   |
+| CASPER • 3    | Google Gemini    | 女性——直覺、情感洞察   |
 
 ## 裁決結果
 
-| 結果 | 說明 |
-|------|------|
-| **承認（APPROVE）** | 多數贊成 |
-| **否決（REJECT）** | 多數反對 |
-| **棄権（ABSTAIN）** | 兩台以上棄権 |
-| **膠着（DEADLOCK）** | 無多數決定 |
+| 結果     | 說明         |
+| -------- | ------------ |
+| **承認** | 多數贊成     |
+| **否決** | 多數反對     |
+| **棄権** | 兩台以上棄権 |
+| **膠着** | 無多數決定   |
 
 > **重大議題（Critical Matter）**：若兩台以上判定議題屬於不可逆且可能造成重大危害的事項（如自爆、殺傷等），系統將自動切換為全票制——三台必須一致同意才能執行，任何一台反對或棄権均視為否決。點擊各台電腦可查看其是否判定為重大議題。
 
@@ -68,14 +68,14 @@ docker compose up
 
 ## 環境變數
 
-| 變數名稱 | 說明 | 預設值 |
-|----------|------|--------|
-| `OPENAI_API_KEY` | OpenAI API 金鑰（MELCHIOR-1） | — |
-| `OPENAI_MODEL` | OpenAI 模型名稱 | `gpt-4o-mini` |
-| `ANTHROPIC_API_KEY` | Anthropic API 金鑰（BALTHASAR-2） | — |
-| `ANTHROPIC_MODEL` | Anthropic 模型名稱 | `claude-haiku-4-5` |
-| `GOOGLE_API_KEY` | Google AI API 金鑰（CASPER-3） | — |
-| `GOOGLE_MODEL` | Google 模型名稱 | `gemini-2.5-flash` |
+| 變數名稱            | 說明                              | 預設值             |
+| ------------------- | --------------------------------- | ------------------ |
+| `OPENAI_API_KEY`    | OpenAI API 金鑰（MELCHIOR-1）     | —                  |
+| `OPENAI_MODEL`      | OpenAI 模型名稱                   | `gpt-4o-mini`      |
+| `ANTHROPIC_API_KEY` | Anthropic API 金鑰（BALTHASAR-2） | —                  |
+| `ANTHROPIC_MODEL`   | Anthropic 模型名稱                | `claude-haiku-4-5` |
+| `GOOGLE_API_KEY`    | Google AI API 金鑰（CASPER-3）    | —                  |
+| `GOOGLE_MODEL`      | Google 模型名稱                   | `gemini-2.5-flash` |
 
 ## 使用方式
 
